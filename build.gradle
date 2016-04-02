@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.layemut.fieldcontrolledclicklistener'
+version = '0.1'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName version
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    // Set values in ~/.gradle/gradle.properties, set default values otherwise for build to work
+    bintrayUsername = project.properties['bintrayUsername'] != null ? project.properties['bintrayUsername'] : ""
+    bintrayApiKey = project.properties['bintrayApiKey'] != null ? project.properties['bintrayApiKey'] : ""
+}
+
+
+bintray {
+    user = "${bintrayUsername}"
+    key = "${bintrayApiKey}"
+
+    pkg {
+        repo = 'maven'
+        name = 'field-controlled-click-listener'
+
+        version {
+            name = 'field-controlled-click-listener'
+            desc = 'first release'
+            released = new Date()
+            vcsTag = '0.1'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://gitlab.com/layemut/FieldControlledClickListener.git'
+        websiteUrl = 'https://gitlab.com/layemut/FieldControlledClickListener'
+    }
+    configurations = ['archives']
+}
+
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:design:23.2.0'
+}
