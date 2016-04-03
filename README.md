@@ -1,6 +1,6 @@
 # FieldControlledClickListener
 
-This library is aimed to ease controlling views(EditText, Spinner and CheckBox).
+This library is aimed to ease controlling views (EditText, Spinner and CheckBox).
 It is a really simple library, it only controls EditText if it is empty,
 Spinner if its first row is selected, CheckBox if it is checked, nothing more.
 You just simply put all the view you want to control alongside with error message
@@ -9,6 +9,10 @@ and leave the rest to library.
 # Include in your project
 
 ```gradle
+repositories {
+        jcenter()
+}
+
 dependencies {
     compile 'com.layemut.fieldcontrolledclicklistener:fieldcontrolledclicklistener:0.1'
 }
