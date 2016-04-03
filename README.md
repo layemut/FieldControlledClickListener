@@ -10,7 +10,7 @@ and leave the rest to library.
 
 ```gradle
 dependencies {
-    compile 'com.layemut.fieldcontrolledclicklistener:fieldcontrolledclicklistener:0.1@aar'
+    compile 'com.layemut.fieldcontrolledclicklistener:fieldcontrolledclicklistener:0.1'
 }
 ```
 
