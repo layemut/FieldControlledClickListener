@@ -54,7 +54,11 @@ public class FieldControlledClickListener implements View.OnClickListener {
 
         boolean success = true;
         for (Controlee controlee : controlees) {
-            success = controlControlee(controlee);
+            if (controlee != null) {
+                if (!controlControlee(controlee)) {
+                    success = false;
+                }
+            }
         }
 
         if (success) {
@@ -83,8 +87,8 @@ public class FieldControlledClickListener implements View.OnClickListener {
     /**
      * This method is called when the view is {@link EditText} controlling
      * if it is empty.
-     * <p/>
-     * <p/>
+     * <p>
+     * <p>
      * If EditText in a TextInputLayout the error message is set to TextInputLayout
      * else the error message is set to EditText itself.
      *
